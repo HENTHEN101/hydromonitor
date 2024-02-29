@@ -45,6 +45,7 @@ export const useAppStore = defineStore('app', () => {
         return []
     }
 
+    
 
 
     const getTemperatureMMAR = async (start, end) => {
