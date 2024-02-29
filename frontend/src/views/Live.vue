@@ -8,6 +8,7 @@
       </v-col>
       <v-col cols="3">
         <v-card
+        
           class="mb-5"
           style="max-width: 500px"
           color="primaryContainer"
