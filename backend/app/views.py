@@ -27,10 +27,23 @@ from math import floor
 
 @app.route('/api/climo/get/<start>/<end>', methods=['GET']) 
 def get_all(start,end):   
+    start = int(start)
+    end = int(end)
     '''RETURNS ALL THE DATA FROM THE DATABASE THAT EXIST IN BETWEEN THE START AND END TIMESTAMPS'''
-   
+    print(f"Start Date: {start}")
+    print(f"End Date: {end}")
+    print(type(start))
+    print(type(end))
     if request.method == "GET":
         '''Add your code here to complete this route'''
+        try:
+            item = mongo.getAllInRange(start,end)
+            data = list(item)
+            if data:
+                return jsonify({"status":"found","data": data})
+            
+        except Exception as e:
+            print(f"get_all error: f{str(e)}") 
 
     # FILE DATA NOT EXIST
     return jsonify({"status":"not found","data":[]})
@@ -39,11 +52,22 @@ def get_all(start,end):
 
 
 @app.route('/api/mmar/temperature/<start>/<end>', methods=['GET']) 
-def get_temperature_mmar(start,end):   
+def get_temperature_mmar(start,end):
+    start = int(start)
+    end = int(end)   
     '''RETURNS MIN, MAX, AVG AND RANGE FOR TEMPERATURE. THAT FALLS WITHIN THE START AND END DATE RANGE'''
    
     if request.method == "GET": 
         '''Add your code here to complete this route'''
+        try:
+            item = mongo.temperatureMMAR(start,end)
+            data = list(item)
+            if data:
+                return jsonify({"status":"found","data": data})
+            
+        except Exception as e:
+            print(f"get_all error: f{str(e)}")
+        
 
     # FILE DATA NOT EXIST
     return jsonify({"status":"not found","data":[]})
@@ -53,11 +77,21 @@ def get_temperature_mmar(start,end):
 
 
 @app.route('/api/mmar/humidity/<start>/<end>', methods=['GET']) 
-def get_humidity_mmar(start,end):   
+def get_humidity_mmar(start,end):
+    start = int(start)
+    end = int(end)   
     '''RETURNS MIN, MAX, AVG AND RANGE FOR HUMIDITY. THAT FALLS WITHIN THE START AND END DATE RANGE'''
    
     if request.method == "GET": 
         '''Add your code here to complete this route'''
+        try:
+            item = mongo.humidityMMAR(start,end)
+            data = list(item)
+            if data:
+                return jsonify({"status":"found","data": data})
+            
+        except Exception as e:
+            print(f"get_humidity error: f{str(e)}") 
 
     # FILE DATA NOT EXIST
     return jsonify({"status":"not found","data":[]})
@@ -67,11 +101,21 @@ def get_humidity_mmar(start,end):
 
 
 @app.route('/api/frequency/<variable>/<start>/<end>', methods=['GET']) 
-def get_freq_distro(variable,start,end):   
+def get_freq_distro(variable,start,end):
+    start = int(start)
+    end = int(end)   
     '''RETURNS FREQUENCY DISTRIBUTION FOR SPECIFIED VARIABLE'''
    
     if request.method == "GET": 
-        '''Add your code here to complete this route'''         
+        '''Add your code here to complete this route'''    
+        try:
+            item = mongo.frequencyDistro(variable,start,end)
+            data = list(item)
+            if data:
+                return jsonify({"status":"found","data": data})
+            
+        except Exception as e:
+            print(f"get_all error: f{str(e)}")     
 
     # FILE DATA NOT EXIST
     return jsonify({"status":"not found","data":[]})
@@ -129,6 +173,3 @@ def add_header(response):
 def page_not_found(error):
     """Custom 404 page."""    
     return jsonify({"status": 404}), 404
-
-
-
