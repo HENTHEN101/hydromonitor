@@ -48,7 +48,7 @@ def get_all(start,end):
     # FILE DATA NOT EXIST
     return jsonify({"status":"not found","data":[]})
    
-
+   
 
 
 @app.route('/api/mmar/temperature/<start>/<end>', methods=['GET']) 
