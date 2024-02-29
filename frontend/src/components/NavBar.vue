@@ -6,6 +6,7 @@
                              
                         </VCol>
 
+                        
                         <VCol cols="10"  align="center"   > 
 
                             <RouterLink class="route" :to="{ name: 'Home' }" >
