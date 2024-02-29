@@ -14,6 +14,7 @@ export const useMqttStore =  defineStore('mqtt', ()=>{
         2. https://eclipse.dev/paho/files/jsdoc/Paho.MQTT.Client.html
     */ 
 
+        
     // STATES 
     const mqtt              = ref(null);
     const host              = ref("dbs.msjrealtms.com");  // Host Name or IP address
